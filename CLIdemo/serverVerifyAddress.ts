@@ -30,34 +30,34 @@ const FALSE = '0x66616c7365';
 const ISAUTHENTICATED = '0x697361757468656e74696361746564';
 const ISWAITING = '0x697377616974696e67';
 
-async function verifyWallet(wallet, socket) {
+async function verifyAddress(address, socket) {
 
   try {
 
-    console.log(green(`ACCESSNFT:`) +
-      ` initiating authentication process for wallet ` + magenta(`${wallet}`));
+    console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
+      `initiating authentication process for address ` + magenta(`${address}`));
 
     // establish connection with blockchain
-    const [ api, contract ] = await setupSession('verifyWallet');
+    const [ api, contract ] = await setupSession('verifyAddress');
 
     // track nfts
     let notAuthenticated = false;
     let notAuthenticatedId;
 
-    console.log(yellow(`ACCESSNFT:`) +
-      ` checking if waiting for micropayment from wallet ` + magenta(`${wallet}`));
-    console.log(yellow(`ACCESSNFT:`) +
-      ` and checking that wallet contains unauthenticated nfts`);
+    console.log(yellow(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
+      `checking if waiting for micropayment from address ` + magenta(`${address}`));
+    console.log(yellow(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
+      `and checking that address contains unauthenticated nfts`);
 
-    // get nft collection for wallet
+    // get nft collection for address
     var [ gasRequired, storageDepositRequired, RESULT_collection, OUTPUT_collection ] =
       await contractGetter(
         api,
         socket,
         contract,
-        'verifyWallet',
+        'verifyAddress',
         'getCollection',
-        wallet,
+        address,
       );
 
     // find nft to authenticate
@@ -71,7 +71,7 @@ async function verifyWallet(wallet, socket) {
           api,
           socket,
           contract,
-          'verifyWallet',
+          'verifyAddress',
           'psp34Metadata::getAttribute',
           {u64: nft.u64},
           ISAUTHENTICATED,
@@ -88,40 +88,40 @@ async function verifyWallet(wallet, socket) {
     // if after checking OUTPUT_collection there are no nfts to authenticate
     if (notAuthenticated == false) {
 
-      console.log(red(`ACCESSNFT:`) +
-        ` all nfts in wallet ` + magenta(`${wallet}`) + ` already authenticated`);
+      console.log(red(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
+        `all nfts in address ` + magenta(`${address}`) + ` already authenticated`);
 
-      terminateProcess(socket, 'verifyWallet', 'all-nfts-authenticated', []);
+      terminateProcess(socket, 'verifyAddress', 'all-nfts-authenticated', []);
 
     // or send micropayment to unauthenticated nft
     } else if (notAuthenticated == true) {
 
       const hash = await sendMicropayment(
         api,
-        wallet,
+        address,
         notAuthenticatedId
       );
 
-      terminateProcess(socket, 'verifyWallet', 'waiting', [hash, notAuthenticatedId, wallet])
+      terminateProcess(socket, 'verifyAddress', 'waiting', [hash, notAuthenticatedId, address])
     }
   } catch(error) {
 
-    console.log(red(`ACCESSNFT: `) + error);
-    terminateProcess(socket, 'verifyWallet', 'program-error', []);
+    console.log(red(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) + error);
+    terminateProcess(socket, 'verifyAddress', 'program-error', []);
   }
 }
 
 // entrypoint
-process.on('message', wallet => {
+process.on('message', address => {
 
-  // setup socket connection with autheticateWallet script
+  // setup socket connection with serverMainscript
   var socket = io('http://localhost:3000');
   socket.on('connect', () => {
 
-    console.log(blue(`ACCESSNFT:`) +
-      ` verifyWallet socket connected, ID ` + cyan(`${socket.id}`));
+    console.log(blue(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
+      `verifyAddress socket connected, ID ` + cyan(`${socket.id}`));
     
-    verifyWallet(wallet, socket).catch((error) => {
+    verifyAddress(address, socket).catch((error) => {
 
       console.error(error);
       process.exit(-1);

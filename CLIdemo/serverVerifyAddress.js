@@ -57,25 +57,25 @@ var TRUE = '0x74727565';
 var FALSE = '0x66616c7365';
 var ISAUTHENTICATED = '0x697361757468656e74696361746564';
 var ISWAITING = '0x697377616974696e67';
-function verifyWallet(wallet, socket) {
+function verifyAddress(address, socket) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, api, contract, notAuthenticated, notAuthenticatedId, _b, gasRequired, storageDepositRequired, RESULT_collection, OUTPUT_collection, array, nft, _i, array_1, _c, gasRequired, storageDepositRequired, RESULT_authenticated, OUTPUT_authenticated, authenticated, hash, error_1;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     _d.trys.push([0, 10, , 11]);
-                    console.log(green("ACCESSNFT:") +
-                        " initiating authentication process for wallet " + magenta("".concat(wallet)));
-                    return [4 /*yield*/, (0, utils_1.setupSession)('verifyWallet')];
+                    console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        "initiating authentication process for address " + magenta("".concat(address)));
+                    return [4 /*yield*/, (0, utils_1.setupSession)('verifyAddress')];
                 case 1:
                     _a = _d.sent(), api = _a[0], contract = _a[1];
                     notAuthenticated = false;
                     notAuthenticatedId = void 0;
-                    console.log(yellow("ACCESSNFT:") +
-                        " checking if waiting for micropayment from wallet " + magenta("".concat(wallet)));
-                    console.log(yellow("ACCESSNFT:") +
-                        " and checking that wallet contains unauthenticated nfts");
-                    return [4 /*yield*/, (0, utils_1.contractGetter)(api, socket, contract, 'verifyWallet', 'getCollection', wallet)];
+                    console.log(yellow("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        "checking if waiting for micropayment from address " + magenta("".concat(address)));
+                    console.log(yellow("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        "and checking that address contains unauthenticated nfts");
+                    return [4 /*yield*/, (0, utils_1.contractGetter)(api, socket, contract, 'verifyAddress', 'getCollection', address)];
                 case 2:
                     _b = _d.sent(), gasRequired = _b[0], storageDepositRequired = _b[1], RESULT_collection = _b[2], OUTPUT_collection = _b[3];
                     array = Array.from(OUTPUT_collection.ok.ok);
@@ -85,7 +85,7 @@ function verifyWallet(wallet, socket) {
                 case 3:
                     if (!(_i < array_1.length)) return [3 /*break*/, 6];
                     nft = array_1[_i];
-                    return [4 /*yield*/, (0, utils_1.contractGetter)(api, socket, contract, 'verifyWallet', 'psp34Metadata::getAttribute', { u64: nft.u64 }, ISAUTHENTICATED)];
+                    return [4 /*yield*/, (0, utils_1.contractGetter)(api, socket, contract, 'verifyAddress', 'psp34Metadata::getAttribute', { u64: nft.u64 }, ISAUTHENTICATED)];
                 case 4:
                     _c = _d.sent(), gasRequired = _c[0], storageDepositRequired = _c[1], RESULT_authenticated = _c[2], OUTPUT_authenticated = _c[3];
                     authenticated = JSON.parse(JSON.stringify(OUTPUT_authenticated));
@@ -100,22 +100,22 @@ function verifyWallet(wallet, socket) {
                     return [3 /*break*/, 3];
                 case 6:
                     if (!(notAuthenticated == false)) return [3 /*break*/, 7];
-                    console.log(red("ACCESSNFT:") +
-                        " all nfts in wallet " + magenta("".concat(wallet)) + " already authenticated");
-                    (0, utils_1.terminateProcess)(socket, 'verifyWallet', 'all-nfts-authenticated', []);
+                    console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        "all nfts in address " + magenta("".concat(address)) + " already authenticated");
+                    (0, utils_1.terminateProcess)(socket, 'verifyAddress', 'all-nfts-authenticated', []);
                     return [3 /*break*/, 9];
                 case 7:
                     if (!(notAuthenticated == true)) return [3 /*break*/, 9];
-                    return [4 /*yield*/, (0, utils_1.sendMicropayment)(api, wallet, notAuthenticatedId)];
+                    return [4 /*yield*/, (0, utils_1.sendMicropayment)(api, address, notAuthenticatedId)];
                 case 8:
                     hash = _d.sent();
-                    (0, utils_1.terminateProcess)(socket, 'verifyWallet', 'waiting', [hash, notAuthenticatedId, wallet]);
+                    (0, utils_1.terminateProcess)(socket, 'verifyAddress', 'waiting', [hash, notAuthenticatedId, address]);
                     _d.label = 9;
                 case 9: return [3 /*break*/, 11];
                 case 10:
                     error_1 = _d.sent();
-                    console.log(red("ACCESSNFT: ") + error_1);
-                    (0, utils_1.terminateProcess)(socket, 'verifyWallet', 'program-error', []);
+                    console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") + error_1);
+                    (0, utils_1.terminateProcess)(socket, 'verifyAddress', 'program-error', []);
                     return [3 /*break*/, 11];
                 case 11: return [2 /*return*/];
             }
@@ -123,13 +123,13 @@ function verifyWallet(wallet, socket) {
     });
 }
 // entrypoint
-process.on('message', function (wallet) {
-    // setup socket connection with autheticateWallet script
+process.on('message', function (address) {
+    // setup socket connection with serverMainscript
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
-        console.log(blue("ACCESSNFT:") +
-            " verifyWallet socket connected, ID " + cyan("".concat(socket.id)));
-        verifyWallet(wallet, socket)["catch"](function (error) {
+        console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+            "verifyAddress socket connected, ID " + cyan("".concat(socket.id)));
+        verifyAddress(address, socket)["catch"](function (error) {
             console.error(error);
             process.exit(-1);
         });

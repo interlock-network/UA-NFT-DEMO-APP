@@ -104,7 +104,7 @@ function setAuthenticated(wallet, socket) {
                     return [3 /*break*/, 9];
                 case 8:
                     error_1 = _d.sent();
-                    console.log(red("ACCESSNFT: ") + error_1);
+                    console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") + error_1);
                     (0, utils_1.discoSocket)(socket, 'setCredential');
                     process.send('program-error');
                     process.exit();
@@ -118,8 +118,8 @@ process.on('message', function (wallet) {
     // setup socket connection with autheticateWallet script
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
-        console.log(blue("ACCESSNFT:") +
-            " setAuthenticated socket connected, ID " + cyan("".concat(socket.id)));
+        console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+            "setAuthenticated socket connected, ID " + cyan("".concat(socket.id)));
         setAuthenticated(wallet, socket)["catch"](function (error) {
             console.error(error);
             process.exit(-1);
