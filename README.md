@@ -84,6 +84,8 @@ Finally we can start up the client application. Create a new terminal instance i
 node CLIdemo/clientMain.js
 ```
 
+Ando go from there.
+
 ## Play with the app.
 
 There you have it. This app points to an instance of the NFT smart contract that I use on blockchain for testing purposes. For server owner blockchain credentials, I include a throw away test account. Likewise, for client signing credentials, I include a throw away client test account. You have the option to use your own account though if you please.
