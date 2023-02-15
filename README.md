@@ -3,7 +3,7 @@
 <img style="top: -10px" align="right" width="150" height="150" src="https://user-images.githubusercontent.com/69293813/211382026-cf3fc80c-4489-4017-b10e-c1cb27c89ae0.png">
 <img align="right" width="100" height="100" src="https://user-images.githubusercontent.com/69293813/211380333-f29cd213-f1f5-46c6-8c02-5ba0e15588f0.png">
 
-THIS DOC IS ALPHA, NOT INTENDED FOR FINAL RELEASE.
+THIS DOC IS ALPHA & INTERNAL, NOT INTENDED FOR FINAL RELEASE.
 
 This is a test repo for the purpose of putting together a seamless demonstration of the Aleph Zero Interlock grant milestone 2 product.
 
@@ -53,12 +53,14 @@ Now clone this demo repo to your computer and navigate to to the `CLIdemo` direc
 
 ```
 git clone https://github.com/interlock-network/UA-NFT-DEMO-APP;
-cd CLIdemo/UA-NFT-DEMO-APP
+cd UA-NFT-DEMO-APP/CLIdemo
 ```
 
 ## Run the demo
 
 We need to spin up two servers and one client application.
+
+(Please verify you are in the `CLIdemo` directory.)
 
 ### (1) - AUTH-SERVER
 
@@ -92,4 +94,4 @@ There you have it. This app points to an instance of the NFT smart contract that
 
 ## Break the demo
 
-Please.
+Please. Open an issue if you find something wrong.
