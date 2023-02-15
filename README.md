@@ -70,7 +70,7 @@ node serverMain.js
 
 ### (2) - RESTRICTED-AREA-SERVER
 
-Create a new terminal instance in a new tab, making sure it is in the same directory. Start up the restricted access area server. This server is responsible for receiving access credentials over https connection and verifying that their hashes match the hashes stored on the blockchain during the NFT authentication and credential registration process. This resitricted access area server serves content that only verified universal access NFT holders have access to. In practice, this server could serve the entire service, or it may simply issue an authentication token for proffer elsewhere. Run:
+Create a new terminal instance in a new tab, making sure it is in the same directory. Start up the restricted access area server. This server is responsible for receiving access credentials over https connection and verifying that their hashes match the hashes stored on the blockchain during the NFT authentication and credential registration process. This restricted access area server serves content that only verified universal access NFT holders have access to. In practice, this server could serve the entire experience, or it may simply issue an authentication token for proffer elsewhere. Run:
 
 ```
 node --expose-gc restrictedArea.js
