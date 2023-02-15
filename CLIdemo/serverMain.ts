@@ -99,7 +99,7 @@ async function transferListener(socket) {
           console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
             color.bold(`auth transfer complete  `));
           console.log(yellow(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
-            `need return transfer to ` + magenta(`${event.data[1]}`));
+            `need return transfer to ` + magenta(`${event.data[1]}\n`));
         //
         // from verifying address
         } else if (receivingAddress == OWNER_ADDRESS &&
@@ -114,7 +114,7 @@ async function transferListener(socket) {
           console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
             color.bold(`received transfer from `) + magenta(`${clientAddress}`));
           console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
-            magenta(`${clientAddress}`) + ` authenticated`);
+            magenta(`${clientAddress}`) + ` authenticated\n`);
 
           // notify the client that their transfer was recorded
           io.to(clientSocketId).emit('payment-received', [nftId]);
@@ -154,7 +154,7 @@ async function transferListener(socket) {
           console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
             color.bold(`Got NFT pay from `) + magenta(`${recipient}`));
           console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
-            `minting NFT!`);
+            `minting NFT!\n`);
 
           // notify the client that their transfer was recorded
           io.to(clientSocketId).emit('minting-nft', [NFTPRICE]);
@@ -242,7 +242,7 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('already-waiting', [waitingNftId]);
 
         console.log(red(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
-          magenta(`${address}`) + ` owes micropayment`);
+          magenta(`${address}`) + ` owes micropayment\n`);
       }
     } else if (message == 'mint-nft') {
 
@@ -256,7 +256,7 @@ io.on('connection', (socket) => {
       io.to(socket.id).emit('pay-to-mint', [NFTPRICE]);
 
       console.log(green(`UA-NFT`) + color.bold(`|AUTH-SERVER: `) +
-        magenta(`${recipient} `) + `...waiting on payment`);
+        magenta(`${recipient} `) + `...waiting on payment\n`);
 
       // remove recipient from mint queue after one minute of no payment receipt
       //

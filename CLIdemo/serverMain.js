@@ -129,7 +129,7 @@ function transferListener(socket) {
                                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
                                         color.bold("auth transfer complete  "));
                                     console.log(yellow("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                                        "need return transfer to " + magenta("".concat(event.data[1])));
+                                        "need return transfer to " + magenta("".concat(event.data[1], "\n")));
                                     //
                                     // from verifying address
                                 }
@@ -143,7 +143,7 @@ function transferListener(socket) {
                                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
                                         color.bold("received transfer from ") + magenta("".concat(clientAddress_1)));
                                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                                        magenta("".concat(clientAddress_1)) + " authenticated");
+                                        magenta("".concat(clientAddress_1)) + " authenticated\n");
                                     // notify the client that their transfer was recorded
                                     io.to(clientSocketId_1).emit('payment-received', [nftId_1]);
                                     // change contract state to indicate nft is authenticated
@@ -175,7 +175,7 @@ function transferListener(socket) {
                                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
                                         color.bold("Got NFT pay from ") + magenta("".concat(recipient_1)));
                                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                                        "minting NFT!");
+                                        "minting NFT!\n");
                                     // notify the client that their transfer was recorded
                                     io.to(clientSocketId_2).emit('minting-nft', [NFTPRICE]);
                                     // fire up minting script
@@ -249,7 +249,7 @@ io.on('connection', function (socket) {
                             waitingQueue.set(address_1, waitingAddressInfo);
                             io.to(socket.id).emit('already-waiting', [waitingNftId]);
                             console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                                magenta("".concat(address_1)) + " owes micropayment");
+                                magenta("".concat(address_1)) + " owes micropayment\n");
                         }
                         return [3 /*break*/, 4];
                     case 1:
@@ -261,7 +261,7 @@ io.on('connection', function (socket) {
                         mintQueue.set(recipient_2, [socket.id, NFTPRICE]);
                         io.to(socket.id).emit('pay-to-mint', [NFTPRICE]);
                         console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                            magenta("".concat(recipient_2, " ")) + "...waiting on payment");
+                            magenta("".concat(recipient_2, " ")) + "...waiting on payment\n");
                         // remove recipient from mint queue after one minute of no payment receipt
                         //
                         // this is to avoid ddos type scenario where someone crashes server by flooding with mint requests

@@ -79,8 +79,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
         switch (_b.label) {
             case 0:
                 console.log(blue("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("UNIVERSAL ACCESS NFT DEMO APP, socket ID " + cyan("".concat(socket.id))) +
-                    color.bold(" connected successfully to the secure registration server."));
+                    color.bold("UNIVERSAL ACCESS NFT APP, ID" + cyan(" ".concat(socket.id))));
+                console.log(blue("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("connected to the secure registration server.\n"));
                 return [4 /*yield*/, (0, utils_1.setupSession)('setAuthenticated')];
             case 1:
                 _a = _b.sent(), api = _a[0], contract = _a[1];
@@ -88,9 +89,11 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
             case 2:
                 if (!!(_b.sent())) return [3 /*break*/, 4];
                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Your address has no universal access NFT collection. Please return to main menu to mint.\n"));
+                    color.bold("Your have no universal access NFTs."));
+                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("Please return to main menu to mint.\n"));
                 // if no collection propmt to return to main menu      
-                return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to mint universal access NFT')];
+                return [4 /*yield*/, (0, utils_1.returnToMain)('goto main menu to mint universal access NFT')];
             case 3:
                 // if no collection propmt to return to main menu      
                 _b.sent();
@@ -105,19 +108,29 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
                                     color.bold("!!! WARNING !!!\n"));
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("Because your credentials are anonymized, it is impossible for us to tell you your"));
+                                    color.bold("Because your credentials are anonymized, "));
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("username or password if you forget."));
+                                    color.bold("it is impossible for us to reveal your"));
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("If you forget your username or password, you must repeat this registration process using"));
+                                    color.bold("username or password if you forget.\n"));
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("a DIFFERENT username. This is the only way to ensure that access credentials are"));
+                                    color.bold("If you forget your username or password, you"));
                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("anonymized and secure in a blockchain environment. Maybe write them down somewhere...\n\n"));
+                                    color.bold("must repeat this registration process with"));
+                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("a DIFFERENT username.\n"));
+                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("(This is the only way we can ensure access"));
+                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("credentials are anonymized and secure in a"));
+                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("transparent blockchain environment.)\n"));
+                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("Maybe WRITE THEM DOWN somewhere...?\n"));
                                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("AT NO POINT ARE YOUR CREDENTIALS STORED IN A DATABASE."));
+                                    color.bold("CREDENTIALS ARE NEVER STORED IN A DATABASE."));
                                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("THEY ARE ANONYMIZED AND STORED ON THE BLOCKCHAIN.\n\n"));
+                                    color.bold("THEY ARE ANONYMIZED & STORED ON BLOCKCHAIN.\n\n"));
                                 isAvailable = false;
                                 _a.label = 1;
                             case 1:
@@ -125,9 +138,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 return [4 /*yield*/, prompts({
                                         type: 'text',
                                         name: 'username',
-                                        message: 'Please choose a username with 5 or more characters and no spaces.',
+                                        message: 'Please choose username, 5+ characters of any type but no space.',
                                         validate: function (username) { return !isValidUsername(username) ?
-                                            red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Too short or contains spaces." : true; }
+                                            red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Too short / contains spaces." : true; }
                                     }, { onCancel: utils_1.onCancel })];
                             case 2:
                                 responseUsername = _a.sent();
@@ -142,7 +155,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 }
                                 else {
                                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                        "Username already taken. Choose a different username.\n");
+                                        color.bold("Username taken. Choose different username.\n"));
                                 }
                                 return [3 /*break*/, 1];
                             case 4:
@@ -156,9 +169,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                     {
                                                         type: 'password',
                                                         name: 'password',
-                                                        message: 'Please choose a password with 8 or more characters.\nIt may contain whitespace.',
+                                                        message: 'Please choose password with 8+ characters.\nWhitespace ok, no length limit.',
                                                         validate: function (password) { return (password.length < 8) ?
-                                                            red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Password too short." : true; }
+                                                            red("UA-NFT") + color.bold("|CLIENT-APP: ") + color.bold("Password too short.\n") : true; }
                                                     },
                                                     {
                                                         type: 'password',
@@ -172,7 +185,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                 password = (_b = responsePassword.password) !== null && _b !== void 0 ? _b : 'password';
                                                 console.log('');
                                                 if (password != passwordVerify) {
-                                                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Password mismatch.");
+                                                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") + color.bold("Password mismatch.\n"));
                                                 }
                                                 _c.label = 2;
                                             case 2:
@@ -180,9 +193,11 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                 _c.label = 3;
                                             case 3:
                                                 console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                    color.bold("You successfully entered your new user credentials. ."));
+                                                    color.bold("You successfully entered new credentials."));
                                                 console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                    color.bold("Wait while we transfer a micropayment of 1 pico TZERO to your address.\n"));
+                                                    color.bold("Wait while we transfer a micropayment of"));
+                                                console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                    color.bold("1 pico TZERO to your address.\n"));
                                                 socket.emit('authenticate-nft', [CLIENT_ADDRESS, (0, utils_1.getHash)(username), (0, utils_1.getHash)(password)]);
                                                 return [2 /*return*/];
                                         }
@@ -213,22 +228,26 @@ socket.onAny(function (message) {
                     nftId = args[0][0];
                     transactionHash = args[0][1];
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("We just transfered a verification micropayment of 1 pico TZERO to your address at"));
+                        color.bold("We just transfered a verification micropayment of"));
+                    console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("1 pico TZERO to your address at"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         magenta("".concat(CLIENT_ADDRESS) + "\n"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("You may confirm this via the transaction hash"));
+                        color.bold("You may confirm this via transaction hash"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        cyan("0x".concat(transactionHash)) + "\n");
+                        color.yellow("0x".concat(transactionHash)) + "\n");
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Please transfer 1 pico TZERO in return to complete"));
+                        color.bold("Please return transfer 1 pico TZERO to complete"));
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("your registration for universal access NFT ") +
-                        red("ID ".concat(nftId)) + color.bold(" to our address at:"));
+                        red("ID ".concat(nftId)) + color.bold(" to"));
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         magenta("".concat(OWNER_ADDRESS, "\n")));
-                    console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("The purpose of this is to make sure you actually own the address (and NFT) you claim.\n"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("The purpose of this is to make sure you actually"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("own the address (and NFT) you claim.\n"));
                     // authorize micropayment?
                     return [4 /*yield*/, (function () { return __awaiter(void 0, void 0, void 0, function () {
                             var responseChoice, choice, _a, api, contract;
@@ -237,7 +256,7 @@ socket.onAny(function (message) {
                                     case 0: return [4 /*yield*/, prompts({
                                             type: 'confirm',
                                             name: 'choice',
-                                            message: 'Do you authorize this application to transfer 1 pico TZERO for verification purposes?'
+                                            message: 'Do you authorize this application to transfer\n1 pico TZERO for verification purposes?'
                                         }, { onCancel: utils_1.onCancel })];
                                     case 1:
                                         responseChoice = _b.sent();
@@ -245,10 +264,12 @@ socket.onAny(function (message) {
                                         console.log('');
                                         if (choice == false) {
                                             console.clear();
-                                            console.log(red("\n       ABORTING REGISTRATION. WE WILL NEED YOU TO RETURN THE VERIFICATION "));
-                                            console.log(red("       MICROPAYMENT BEFORE YOU TRY TO REGISTER A DIFFERENT NFT. REPEAT THE"));
-                                            console.log(red("       REGISTRATION PROCESS WHEN READY. YOU MAY CHOOSE A DIFFERENT USERNAME"));
-                                            console.log(red("       AND PASSWORD IF YOU PLEASE."));
+                                            console.log(red("\n ABORTING REGISTRATION.\n"));
+                                            console.log(red(" WE NEED YOU TO RETURN THE VERIFICATION "));
+                                            console.log(red(" MICROPAYMENT BEFORE REGISTERING A DIFFERENT NFT."));
+                                            console.log(red(" REPEAT THE REGISTRATION PROCESS WHEN READY."));
+                                            console.log(red(" YOU MAY CHOOSE A DIFFERENT USERNAME"));
+                                            console.log(red(" AND PASSWORD IF YOU PLEASE."));
                                             setTimeout(function () {
                                                 process.send('done');
                                                 process.exit();
@@ -274,10 +295,10 @@ socket.onAny(function (message) {
                     if (!(message == 'already-waiting')) return [3 /*break*/, 4];
                     nftId = args[0][0];
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("We are still waiting on your verification micropayment for NFT ") +
+                        color.bold("Waiting on NFT ") + red("".concat(nftId)) + color.bold(" micropayment") +
                         red("ID ".concat(nftId)) + ".\n");
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Please transfer 1 pico TZERO to our address to complete your NFT registration:"));
+                        color.bold("Please transfer authorize transfer of 1 pico TZERO."));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         magenta("".concat(OWNER_ADDRESS, "\n")));
                     // authorize micropayment?
@@ -288,7 +309,7 @@ socket.onAny(function (message) {
                                     case 0: return [4 /*yield*/, prompts({
                                             type: 'confirm',
                                             name: 'choice',
-                                            message: 'Do you authorize this application to transfer 1 pico TZERO for verification purposes?'
+                                            message: 'Do you authorize transfer of 1 pico TZERO\nfor verification purposes?'
                                         }, { onCancel: utils_1.onCancel })];
                                     case 1:
                                         responseChoice = _b.sent();
@@ -296,10 +317,12 @@ socket.onAny(function (message) {
                                         console.log('');
                                         if (choice == false) {
                                             console.clear();
-                                            console.log(red("\n       ABORTING REGISTRATION. WE WILL NEED YOU TO RETURN THE VERIFICATION "));
-                                            console.log(red("       MICROPAYMENT BEFORE YOU TRY TO REGISTER A DIFFERENT NFT. REPEAT THE"));
-                                            console.log(red("       REGISTRATION PROCESS WHEN READY. YOU MAY CHOOSE A DIFFERENT USERNAME"));
-                                            console.log(red("       AND PASSWORD IF YOU PLEASE."));
+                                            console.log(red("\n ABORTING REGISTRATION.\n"));
+                                            console.log(red(" WE NEED YOU TO RETURN THE VERIFICATION "));
+                                            console.log(red(" MICROPAYMENT BEFORE REGISTERING A DIFFERENT NFT."));
+                                            console.log(red(" REPEAT THE REGISTRATION PROCESS WHEN READY."));
+                                            console.log(red(" YOU MAY CHOOSE A DIFFERENT USERNAME"));
+                                            console.log(red(" AND PASSWORD IF YOU PLEASE."));
                                             setTimeout(function () {
                                                 process.send('done');
                                                 process.exit();
@@ -325,21 +348,25 @@ socket.onAny(function (message) {
                     if (!(message == 'payment-received')) return [3 /*break*/, 5];
                     nftId = args[0][0];
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Your verification micropayment has been received!!!\n"));
+                        color.bold("Your micropayment was received!!!\n"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Stand by while we set your NFT ") + red("ID ".concat(nftId, " ")) +
+                        color.bold("Stand by while we set your NFT ") + red("ID ".concat(nftId, " ")));
+                    console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("to 'authenticated' and store your"));
-                    console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("anonymized credentials on the blockchain!\n"));
                     return [3 /*break*/, 10];
                 case 5:
                     if (!(message == 'setAuthenticated-complete')) return [3 /*break*/, 6];
                     nftId = args[0][0];
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Your NFT ") + red("ID ".concat(nftId, " ")) +
-                        color.bold("has been set authenticated on the blockchain.\n"));
+                        color.bold("Your NFT ") + red("ID ".concat(nftId)) + color.bold(" has been set"));
+                    console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("'authenticated' on the blockchain.\n"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Stand by while we store your anonymized credentials on the blockchain.\n"));
+                        color.bold("Stand by while we store your anonymized"));
+                    console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("credentials on the blockchain.\n"));
                     return [3 /*break*/, 10];
                 case 6:
                     if (!(message == 'credential-set')) return [3 /*break*/, 8];
@@ -347,45 +374,59 @@ socket.onAny(function (message) {
                     userhash = args[0][1];
                     passhash = args[0][2];
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Your anonymized NFT access credentials have been stored on the blockchain.\n\n\n\n\n"));
+                        color.bold("Your anonymized NFT access credentials have"));
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("You have successfully registered your universal access NFT") + red(" ID ".concat(nftId)));
+                        color.bold("been stored on the blockchain.\n\n\n\n\n"));
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("and may now login to the restricted access area!!!\n"));
+                        color.bold("Universal access NFT") + red(" ID ".concat(nftId)) + color.bold(" authenticated!!!"));
+                    console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("You may now login to the restricted access area!!!\n\n\n\n\n"));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("!!! REMINDER WARNING !!!\n"));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Because your credentials are anonymized, it is impossible for us to tell you your"));
+                        color.bold("Because your credentials are anonymized, "));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("username or password if you forget."));
+                        color.bold("it is impossible for us to reveal your"));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("If you forget your username or password, you must repeat this registration process using"));
+                        color.bold("username or password if you forget.\n"));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("a DIFFERENT username. This is the only way to ensure that access credentials are"));
+                        color.bold("If you forget your username or password, you"));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("anonymized and secure in a blockchain environment. Maybe write them down somewhere...\n\n\n"));
+                        color.bold("must repeat this registration process with"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("a DIFFERENT username.\n"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("(This is the only way we can ensure access"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("credentials are anonymized and secure in a"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("transparent blockchain environment.\n"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("Maybe WRITE THEM DOWN somewhere...?\n"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("AT NO POINT ARE YOUR CREDENTIALS STORED IN A DATABASE."));
+                        color.bold("CREDENTIALS ARE NEVER STORED IN A DATABASE."));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("THEY ARE ANONYMIZED AND STORED ON THE BLOCKCHAIN.\n\n"));
+                        color.bold("THEY ARE ANONYMIZED & STORED ON BLOCKCHAIN.\n\n"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("USERNAME STORED ON BLOCKCHAIN AS SHA256 HASH"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        blue(" 0x".concat(userhash)));
+                        color.yellow("0x".concat(userhash)));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("PASSWORD STORED ON BLOCKCHAIN AS SHA256 HASH "));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        blue(" 0x".concat(passhash, "\n")));
+                        color.yellow("0x".concat(passhash, "\n\n")));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("YOUR USERNAME AND PASSWORD ARE IMPOSSIBLE TO DERIVE FROM THE SHA256 HASH. "));
+                        color.bold("USERNAME AND PASSWORD IMPOSSIBLE TO DERIVE FROM HASH. "));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("SHA256 HASH NUMBERS ARE USED TO VERIFY THAT YOU POSSESS THE CORRECT CREDENTIALS"));
+                        color.bold("SHA256 HASH NUMBERS VERIFY YOU POSSESS CREDENTIALS"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("BY COMPARING LOCAL HASH OF CREDENTIALS YOU PROVIDE ON LOGIN WITH HASH"));
+                        color.bold("BY COMPARING LOCAL HASH OF CREDENTIALS YOU PROVIDE ON"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("STORED ON BLOCKCHAIN THAT WE GENERATED IN THIS REGISTRATION SESSION."));
+                        color.bold("ANY LOGIN, WITH HASHES WE JUST GENERATED DURING REGISTRATION"));
                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("AT NO POINT ARE YOUR CREDENTIALS STORED IN A DATABASE.\n\n"));
+                        color.bold("AND STORED ON THE BLOCKCHAIN.\n"));
+                    console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("YOUR CREDENTIALS ARE NEVER STORED IN A DATABASE.\n\n"));
                     return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu')];
                 case 7:
                     _a.sent();
@@ -395,7 +436,9 @@ socket.onAny(function (message) {
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("All your NFTs are already authenticated."));
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("You need to buy a new universal access NFT to register and gain access to restricted area.\n"));
+                        color.bold("You need to buy a new universal access NFT"));
+                    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                        color.bold("to register and gain access to restricted area.\n"));
                     return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to mint new nft')];
                 case 9:
                     _a.sent();
@@ -485,7 +528,8 @@ var transferMicropayment = function (api) { return __awaiter(void 0, void 0, voi
 }); };
 // handle misc error
 var otherError = function () {
-    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") + 'failed to gather required information\n');
+    console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+        color.bold('Failed to register credentials.\n'));
     process.send('error');
     process.exit();
 };

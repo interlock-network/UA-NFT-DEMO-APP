@@ -72,7 +72,7 @@ function setAuthenticated(recipient, socket) {
                 case 1:
                     _a = _b.sent(), api = _a[0], contract = _a[1];
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "minting NFT for: " + magenta(" ".concat(recipient, "}")));
+                        "minting NFT for" + magenta(" ".concat(recipient)));
                     // call mint tx
                     return [4 /*yield*/, (0, utils_1.contractDoer)(api, socket, contract, storageDepositLimit, refTimeLimit, proofSizeLimit, 'mint', 'mint', recipient)];
                 case 2:

@@ -86,7 +86,7 @@ function credentialCheck(message) {
                             // is this error a custom error?      
                             if (OUTPUT.ok.err.hasOwnProperty('custom')) {
                                 error = OUTPUT.ok.err.custom.toString().replace(/0x/, '');
-                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") +
+                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") +
                                     "".concat((0, utils_1.hexToString)(error)));
                                 process.send('bad-username');
                                 process.exit();
@@ -100,7 +100,7 @@ function credentialCheck(message) {
                     }
                     else {
                         // loggin calling error and terminate
-                        console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") +
+                        console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") +
                             "".concat(result.asErr.toHuman()));
                     }
                     onchainPasshash = OUTPUT.ok.ok[0];
@@ -121,21 +121,21 @@ function credentialCheck(message) {
                             // is this error a custom error?      
                             if (OUTPUT.ok.err.hasOwnProperty('custom')) {
                                 error = OUTPUT.ok.err.custom.toString().replace(/0x/, '');
-                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") +
+                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") +
                                     "".concat((0, utils_1.hexToString)(error)));
                                 process.send('bad-username');
                                 process.exit();
                             }
                             else {
                                 // if not custom then print Error enum type
-                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") +
+                                console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") +
                                     "".concat(OUTPUT.ok.err));
                             }
                         }
                     }
                     else {
                         // loggin calling error and terminate
-                        console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") +
+                        console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") +
                             "".concat(result.asErr.toHuman()));
                     }
                     authStatus = OUTPUT.ok;
@@ -148,7 +148,7 @@ function credentialCheck(message) {
                     return [3 /*break*/, 5];
                 case 4:
                     error_1 = _d.sent();
-                    console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA-SERVER: ") + error_1);
+                    console.log(red("UA-NFT") + color.bold("|RESTRICTED-AREA: ") + error_1);
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }

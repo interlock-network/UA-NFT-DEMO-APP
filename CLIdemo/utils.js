@@ -224,7 +224,7 @@ function setupSession(origin) {
                     // setup session
                     //
                     // logging
-                    console.log(blue("\nUA-NFT") + color.bold("|BLOCKCHAIN: ") +
+                    console.log(blue("UA-NFT") + color.bold("|BLOCKCHAIN: ") +
                         color.bold("".concat(origin, " websocket connecting to ") + magenta("Aleph Zero blockchain")));
                     wsProvider = new WsProvider(WEB_SOCKET);
                     return [4 /*yield*/, ApiPromise.create({ provider: wsProvider })];
@@ -392,7 +392,7 @@ exports.hasCollection = hasCollection;
 //
 function discoSocket(socket, origin) {
     console.log(blue("UA-NFT") + color.bold("|SOCKET: ") +
-        "".concat(origin, " socket disconnecting, ID ") + cyan("".concat(socket.id)));
+        "".concat(origin, " socket disconnecting, ID ") + cyan("".concat(socket.id, "\n")));
     socket.disconnect();
 }
 exports.discoSocket = discoSocket;
