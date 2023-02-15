@@ -119,7 +119,7 @@ process.on('message', function (wallet) {
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
         console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-            "setAuthenticated socket connected, ID " + cyan("".concat(socket.id)));
+            "setAuth connect, SID " + cyan("".concat(socket.id)));
         setAuthenticated(wallet, socket)["catch"](function (error) {
             console.error(error);
             process.exit(-1);

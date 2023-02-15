@@ -140,8 +140,8 @@ socket.onAny(function (message) {
                                             name: 'return',
                                             message: 'Please confirm:',
                                             choices: [
-                                                { title: "YES, transfer ".concat(adjustedPrice_1, " AZERO to mint my NFT."), value: 'mint' },
-                                                { title: 'NO, I do not wish to purchase an NFT for this price.', value: 'cancel' },
+                                                { title: "YES, transfer ".concat(adjustedPrice_1, " AZERO to mint my NFT.\n"), value: 'mint' },
+                                                { title: 'NO, I do not wish to purchase an NFT for this price.\n', value: 'cancel' },
                                             ]
                                         }, { onCancel: utils_1.onCancel })];
                                     case 1:
@@ -164,7 +164,8 @@ socket.onAny(function (message) {
                                             color.bold("Transfer transaction finalized."));
                                         console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                                             color.bold("Transaction hash for record: "));
-                                        console.log(color.yellow("".concat(hash, "\n")));
+                                        console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                            color.yellow("".concat(hash, "\n")));
                                         _b.label = 4;
                                     case 4: return [2 /*return*/];
                                 }

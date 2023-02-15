@@ -61,7 +61,7 @@ var MAXRETRY = 3;
 var refTimeLimit = 8000000000;
 var proofSizeLimit = 180000;
 var storageDepositLimit = null;
-function setAuthenticated(recipient, socket) {
+function mint(recipient, socket) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, api, contract, error_1;
         return __generator(this, function (_b) {
@@ -72,7 +72,9 @@ function setAuthenticated(recipient, socket) {
                 case 1:
                     _a = _b.sent(), api = _a[0], contract = _a[1];
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "minting NFT for" + magenta(" ".concat(recipient)));
+                        "minting UA-NFT for");
+                    console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        magenta("".concat(recipient, "\n")));
                     // call mint tx
                     return [4 /*yield*/, (0, utils_1.contractDoer)(api, socket, contract, storageDepositLimit, refTimeLimit, proofSizeLimit, 'mint', 'mint', recipient)];
                 case 2:
@@ -96,8 +98,8 @@ process.on('message', function (wallet) {
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
         console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-            "mint socket connected, ID " + cyan("".concat(socket.id)));
-        setAuthenticated(wallet, socket)["catch"](function (error) {
+            "mint connected, SID " + cyan("".concat(socket.id)));
+        mint(wallet, socket)["catch"](function (error) {
             console.error(error);
             process.exit(-1);
         });

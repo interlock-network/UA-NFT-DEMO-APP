@@ -50,6 +50,7 @@ var red = color.red.bold;
 var green = color.green.bold;
 var blue = color.blue.bold;
 var cyan = color.cyan;
+var magenta = color.magenta;
 // constants
 //
 // null === no limit
@@ -69,6 +70,10 @@ function setCredential(socket, message) {
                     _a = _b.sent(), api = _a[0], contract = _a[1];
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
                         "setting credentials for NFT " + red("ID ".concat(message.id)));
+                    console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        "owned by address");
+                    console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
+                        magenta("".concat(message.address, "\n")));
                     // call setCredential tx
                     return [4 /*yield*/, (0, utils_1.contractDoer)(api, socket, contract, storageDepositLimit, refTimeLimit, proofSizeLimit, 'setCredential', 'setCredential', { u64: message.id }, '0x' + message.userhash, '0x' + message.passhash)];
                 case 2:
@@ -92,7 +97,7 @@ process.on('message', function (message) {
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
         console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-            "setCredential socket connected, ID " + cyan("".concat(socket.id)));
+            "setCred connect, SID " + cyan("".concat(socket.id)));
         setCredential(socket, message)["catch"](function (error) {
             console.error(error);
             process.exit(-1);

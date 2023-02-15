@@ -138,7 +138,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 return [4 /*yield*/, prompts({
                                         type: 'text',
                                         name: 'username',
-                                        message: 'Please choose username, 5+ characters of any type but no space.',
+                                        message: 'Please choose username, 5+ characters of any type but no space.\n',
                                         validate: function (username) { return !isValidUsername(username) ?
                                             red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Too short / contains spaces." : true; }
                                     }, { onCancel: utils_1.onCancel })];
@@ -169,14 +169,14 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                     {
                                                         type: 'password',
                                                         name: 'password',
-                                                        message: 'Please choose password with 8+ characters.\nWhitespace ok, no length limit.',
+                                                        message: 'Please choose password with 8+ characters.\nWhitespace ok, no length limit.\n',
                                                         validate: function (password) { return (password.length < 8) ?
                                                             red("UA-NFT") + color.bold("|CLIENT-APP: ") + color.bold("Password too short.\n") : true; }
                                                     },
                                                     {
                                                         type: 'password',
                                                         name: 'passwordVerify',
-                                                        message: 'Please verify your password.'
+                                                        message: 'Please verify your password.\n'
                                                     }
                                                 ], { onCancel: utils_1.onCancel })];
                                             case 1:
@@ -490,7 +490,7 @@ var isAvailableUsername = function (api, contract, usernameHash) { return __awai
                 if (RESULT.ok.flags == 'Revert') {
                     error = OUTPUT.ok.err.custom.toString().replace(/0x/, '');
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("username available\n"));
+                        color.bold("username  available\n"));
                     // username is available
                     return [2 /*return*/, true];
                 }
