@@ -15,7 +15,7 @@ Please see if this works and provide feedback. The target audience for this expe
 
 Open up your terminal.
 
-### (1) Install git
+### (1) - Install git
 
 You need git first. Make sure you have it.
 
@@ -31,7 +31,7 @@ or
 sudo apt install git
 ```
 
-### (2) Install node
+### (2) - Install node
 
 Now you need to make sure you have node.js
 
@@ -47,7 +47,7 @@ or
 sudo apt install nodejs
 ```
 
-### (3) Clone repo
+### (3) - Clone repo
 
 Now clone this demo repo to your computer and navigate to to the `CLIdemo` directory within.
 
@@ -94,4 +94,4 @@ There you have it. This app points to an instance of the NFT smart contract that
 
 ## Break the demo
 
-Please. Open an issue if you find something wrong.
+Please. Open an issue if you find something wrong!
