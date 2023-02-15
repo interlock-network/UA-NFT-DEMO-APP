@@ -60,9 +60,11 @@ function deleteWallet() {
         return __generator(this, function (_a) {
             try {
                 console.log(red("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Do you really wish to delete the wallet you associated with account address"));
+                    color.bold("Do you really wish to delete the wallet you"));
                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    magenta("".concat(CLIENT_ADDRESS, "\n")) + "?\n");
+                    color.bold("associated with account address"));
+                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    magenta("".concat(CLIENT_ADDRESS, " ")) + color.bold("?\n"));
                 // prompt
                 //
                 // proceed to delete wallet?
@@ -85,9 +87,11 @@ function deleteWallet() {
                                 }
                                 fs.writeFileSync('.wallet.json', '');
                                 console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("You deleted your wallet."));
+                                    color.bold("You deleted your wallet.\n"));
                                 console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                    color.bold("You will need to re-add a wallet if you want to continue using this application.\n"));
+                                    color.bold("You will need to re-add a wallet if you"));
+                                console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                    color.bold("want to continue using this application.\n"));
                                 return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to add new wallet or quit')];
                             case 2:
                                 _a.sent();

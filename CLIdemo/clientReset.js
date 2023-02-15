@@ -82,17 +82,21 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
     var _a, api, contract, _b, gasRequired, storageDeposit, RESULT_collection, OUTPUT_collection, collection, nfts, nft, reset, _i, nfts_1, _c, gasRequired, storageDeposit, RESULT_authenticated, OUTPUT_authenticated, authenticated;
     return __generator(this, function (_d) {
         switch (_d.label) {
-            case 0: return [4 /*yield*/, (0, utils_1.setupSession)('setAuthenticated')];
+            case 0:
+                console.log('');
+                return [4 /*yield*/, (0, utils_1.setupSession)('setAuthenticated')];
             case 1:
                 _a = _d.sent(), api = _a[0], contract = _a[1];
-                console.log(green("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("In order to reset your universal access NFT credentials, you MUST know the NFT ID.\n"));
-                console.log(green("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Resetting your username and password is a two step process."));
-                console.log(green("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Step 1: reset your universal access NFT here.\n"));
                 console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Step 2: redo the authentication and credential registration step from the main menu.\n\n"));
+                    color.bold("In order to reset your universal access"));
+                console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("NFT credentials, you MUST know the NFT ID.\n"));
+                console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("Resetting credentials is a two step process:"));
+                console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("Step 1 - Reset your universal access NFT here."));
+                console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("Step 2 - Repeat authenticate/registration.\n\n"));
                 return [4 /*yield*/, (0, utils_1.hasCollection)(api, contract, CLIENT_ADDRESS)];
             case 2:
                 if (!!(_d.sent())) return [3 /*break*/, 4];
@@ -132,12 +136,15 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                 _i++;
                 return [3 /*break*/, 6];
             case 9:
-                if (!(reset == [])) return [3 /*break*/, 11];
+                if (!(reset.length == 0)) return [3 /*break*/, 11];
                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("This collection has no universal access NFTs available to reset. ") +
-                    color.bold("They are all not authenticated."));
+                    color.bold("This collection has no universal access."));
+                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("NFTs available to reset."));
+                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("They are all not authenticated.\n"));
                 // if no collection propmt to return to main menu
-                return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu')];
+                return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to mint or authenticate NFTs')];
             case 10:
                 // if no collection propmt to return to main menu
                 _d.sent();
@@ -153,7 +160,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                     name: 'id',
                                     message: 'Now, enter the ID of the NFT credentials you would like to reset.\n',
                                     validate: function (id) { return !reset.includes(id) ?
-                                        red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Not a NFT you can reset right now. Reenter ID." : true; }
+                                        red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Not a NFT you can reset right now." : true; }
                                 }, { onCancel: utils_1.onCancel })];
                             case 1:
                                 responseId = _a.sent();
@@ -170,7 +177,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 if (1 /* gasRequired*/ > gasLimit) { // need to fix dry run.
                                     // logging and terminate
                                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                        'tx aborted, gas required is greater than the acceptable gas limit.');
+                                        'gas needed is more than limit.');
                                 }
                                 return [4 /*yield*/, contract.tx['psp34::transfer']({ storageDepositLimit: storageDepositLimit, gasLimit: gasLimit }, CLIENT_ADDRESS, { u64: id }, [0])
                                         .signAndSend(CLIENT_PAIR, function (result) { return __awaiter(void 0, void 0, void 0, function () {
@@ -187,8 +194,10 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                                                         color.bold("NFT reset successful\n"));
                                                     console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                        color.bold("To create new credentials for universal access NFT ") +
-                                                        red("ID ".concat(id)) + color.bold(" you will need to reauthenticate and register.\n\n                                       "));
+                                                        color.bold("To create new credentials for universal access"));
+                                                    console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                        color.bold("NFT ") + red("ID ".concat(id, " ")) +
+                                                        color.bold("you must reauthenticate and register.\n"));
                                                     return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to reregister NFT ' + red("ID ".concat(id)))];
                                                 case 2:
                                                     _a.sent();

@@ -65,8 +65,10 @@ var socket = (0, socket_io_client_1.io)('https://localhost:8443', {
 });
 socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        console.log(blue("\nUA-NFT:") +
-            " accessApp socket connected, ID " + cyan("".concat(socket.id, "\n")));
+        console.log(blue("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
+            color.bold("demoApp, SID" + cyan(" ".concat(socket.id)) + " connected"));
+        console.log(blue("UA-NFT") + color.bold("|CLIENT-APP: ") +
+            color.bold("to secure restricted access area server via https.\n"));
         // begin prompt tree
         //
         // first prompt: login username
@@ -77,7 +79,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                     case 0: return [4 /*yield*/, prompts({
                             type: 'text',
                             name: 'username',
-                            message: 'Please enter your username to log into restricted area.',
+                            message: 'Please enter your username to log into restricted area.\n',
                             validate: function (username) { return !isValidUsername(username) ?
                                 red("UA-NFT") + color.bold("|CLIENT-APP: ") + "Too short or contains spaces." : true; }
                         }, { onCancel: utils_1.onCancel })];
@@ -103,7 +105,11 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                         console.log('');
                                         if (password != undefined) {
                                             console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                color.bold("submitting login information over secure connection for verification\n"));
+                                                color.bold("submitting login information over secure"));
+                                            console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                color.bold("https connection for SHA256 hash verification"));
+                                            console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                color.bold("against blockchain credential hash record.\n"));
                                             socket.emit('request-access', username, password);
                                             socket.onAny(function (message) {
                                                 var args = [];
@@ -116,7 +122,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                             case 0:
                                                                 if (!(message == 'bad-username')) return [3 /*break*/, 1];
                                                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                                    "username is incorrect or does not exist...please try again");
+                                                                    color.bold("username is incorrect or does not exist..."));
+                                                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                                    color.bold("...please try again\n"));
                                                                 setTimeout(function () {
                                                                     process.send('fail');
                                                                     process.exit();
@@ -125,7 +133,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                             case 1:
                                                                 if (!(message == 'bad-password')) return [3 /*break*/, 2];
                                                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                                    "password is incorrect...please try again");
+                                                                    color.bold("password is incorrect..."));
+                                                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                                    color.bold("...please try again\n"));
                                                                 setTimeout(function () {
                                                                     process.send('fail');
                                                                     process.exit();
@@ -133,18 +143,22 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                                 return [3 /*break*/, 5];
                                                             case 2:
                                                                 if (!(message == 'not-authenticated')) return [3 /*break*/, 4];
-                                                                console.log(red("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                                    color.bold("NFT must be authenticated and credentials reregistered first."));
                                                                 console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                                                    color.bold("This means the NFT was either transfered to new owner, or reset.\n"));
-                                                                return [4 /*yield*/, (0, utils_1.returnToMain)('If you own NFT, return to main to authenticate')];
+                                                                    color.bold("NFT is not authenticated..."));
+                                                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                                    color.bold("This means the NFT was either transfered"));
+                                                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                                    color.bold("to new owner, or is was reset by you and"));
+                                                                console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                                                                    color.bold("needs reauthenticaion for new credentials.\n"));
+                                                                return [4 /*yield*/, (0, utils_1.returnToMain)('If you own NFT, goto main to authenticate')];
                                                             case 3:
                                                                 _a.sent();
                                                                 return [3 /*break*/, 5];
                                                             case 4:
                                                                 if (message == 'access-granted') {
                                                                     console.clear();
-                                                                    console.log(green("\n    SUCCESS!!!\n\n\n\n\n\n\n"));
+                                                                    console.log(green("\n LOGIN SUCCESS!!!\n\n\n\n\n\n\n"));
                                                                     socket.emit('fetch-art');
                                                                     socket.on('ascii-art', function (art) {
                                                                         console.log(red("\n\n".concat(art)));
@@ -177,8 +191,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                                         }); })();
                                                                     });
                                                                     socket.on('did-something-useful', function (result) {
-                                                                        console.log(color.bold("You just did something useful by setting ") +
-                                                                            blue("somethingUseful = ") + green("".concat(result)) + color.bold(" in the restricted area!!!\n"));
+                                                                        console.log(color.bold(" You just did something useful by setting"));
+                                                                        console.log(blue(" somethingUseful = ") + green("".concat(result)));
+                                                                        console.log(color.bold(" in the restricted area!!!\n"));
                                                                         (function () { return __awaiter(void 0, void 0, void 0, function () {
                                                                             var choice;
                                                                             return __generator(this, function (_a) {
@@ -186,8 +201,8 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                                                     case 0: return [4 /*yield*/, prompts({
                                                                                             type: 'select',
                                                                                             name: 'logout',
-                                                                                            message: 'Now choose one of the following options:',
-                                                                                            choices: [{ title: 'logout now', value: 'logout' }]
+                                                                                            message: 'Next options:',
+                                                                                            choices: [{ title: 'logout', value: 'logout' }]
                                                                                         })];
                                                                                     case 1:
                                                                                         choice = _a.sent();
@@ -200,8 +215,9 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                                         }); })();
                                                                     });
                                                                     socket.on('did-something-useless', function (result) {
-                                                                        console.log(color.bold("You just did something useless by setting ") +
-                                                                            blue("somethingUseful = ") + red("".concat(result)) + color.bold(" in the restricted area!!!\n"));
+                                                                        console.log(color.bold(" You just did something useless by setting"));
+                                                                        console.log(blue(" somethingUseful = ") + red("".concat(result)));
+                                                                        console.log(color.bold(" in the restricted area!!!\n"));
                                                                         (function () { return __awaiter(void 0, void 0, void 0, function () {
                                                                             var choice;
                                                                             return __generator(this, function (_a) {
@@ -209,8 +225,8 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                                                                     case 0: return [4 /*yield*/, prompts({
                                                                                             type: 'select',
                                                                                             name: 'logout',
-                                                                                            message: 'Now choose one of the following options:',
-                                                                                            choices: [{ title: 'logout now', value: 'logout' }]
+                                                                                            message: 'Next options:',
+                                                                                            choices: [{ title: 'logout', value: 'logout' }]
                                                                                         })];
                                                                                     case 1:
                                                                                         choice = _a.sent();

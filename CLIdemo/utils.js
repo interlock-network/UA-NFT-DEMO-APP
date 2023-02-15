@@ -417,7 +417,7 @@ exports.isValidMnemonic = isValidMnemonic;
 var onCancel = function (prompt) {
     setTimeout(function () {
         console.clear();
-        console.log(red("\n     YOU ABORTED PROMPT ... RETURNING TO MAIN MENU"));
+        console.log(red("\n YOU ABORTED PROMPT ... RETURNING TO MAIN MENU"));
         setTimeout(function () {
             process.send('abort');
             process.exit();

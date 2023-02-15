@@ -70,21 +70,33 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
     var _a, api, contract, _b, gasRequired, storageDeposit, RESULT_collection, OUTPUT_collection, collection, nfts, nft, _i, nfts_1, _c, gasRequired, storageDeposit, RESULT_authenticated, OUTPUT_authenticated, authenticated;
     return __generator(this, function (_d) {
         switch (_d.label) {
-            case 0: return [4 /*yield*/, (0, utils_1.setupSession)('setAuthenticated')];
+            case 0:
+                console.log('');
+                return [4 /*yield*/, (0, utils_1.setupSession)('setAuthenticated')];
             case 1:
                 _a = _d.sent(), api = _a[0], contract = _a[1];
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("Reminder... You are responsible for remembering the username password pairs"));
+                    color.bold("Reminder..."));
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("associated with each authenticated universal access NFT.\n"));
+                    color.bold("You are responsible for remembering the"));
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("This is because username password pairs are not stored in a traditional database."));
+                    color.bold("username/password pairs associated with"));
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("We only store the obfuscated anonymized username and password hashes on the blockchain"));
+                    color.bold("each authenticated universal access NFT.\n"));
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("for the purpose of comparing the hashes of credentials you provide to our secure restricted"));
+                    color.bold("This is because username/password pairs"));
                 console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                    color.bold("access area server when you log in.\n"));
+                    color.bold("are not stored in a traditional database."));
+                console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("We only store the obfuscated anonymized"));
+                console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("username/password hashes on the blockchain"));
+                console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("for the purpose of comparing the hashes of"));
+                console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("credentials you provide to our secure server"));
+                console.log(color.bold.magenta("UA-NFT") + color.bold("|CLIENT-APP: ") +
+                    color.bold("each time you log in to restricted access area.\n"));
                 return [4 /*yield*/, (0, utils_1.hasCollection)(api, contract, CLIENT_ADDRESS)];
             case 2:
                 if (!!(_d.sent())) return [3 /*break*/, 4];
@@ -103,6 +115,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                 collection = JSON.parse(JSON.stringify(OUTPUT_collection));
                 nfts = Array.from(collection.ok.ok);
                 // print table of NFTs and their authentication status
+                console.log(color.bold("\n YOUR UNIVERSAL ACCESS NFT COLLECTION:\n"));
                 console.log(color.bold("\tNFT ID\t\t\t\tSTATUS\n"));
                 _i = 0, nfts_1 = nfts;
                 _d.label = 6;
@@ -124,7 +137,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
             case 8:
                 _i++;
                 return [3 /*break*/, 6];
-            case 9: return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to authenticate NFTs or login to restricted area')];
+            case 9: return [4 /*yield*/, (0, utils_1.returnToMain)('return to authenticate NFTs or login to restricted area')];
             case 10:
                 _d.sent();
                 return [2 /*return*/];

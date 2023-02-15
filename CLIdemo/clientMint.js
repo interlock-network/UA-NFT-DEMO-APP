@@ -71,7 +71,7 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 console.log(blue("\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                    "accessApp socket connected, ID " + cyan("".concat(socket.id, "\n")));
+                    "demoApp connect, SID " + cyan("".concat(socket.id, "\n")));
                 // confirm mint process begining
                 return [4 /*yield*/, (function () { return __awaiter(void 0, void 0, void 0, function () {
                         var responseChoice, choice;
@@ -80,8 +80,8 @@ socket.on('connect', function () { return __awaiter(void 0, void 0, void 0, func
                                 case 0: return [4 /*yield*/, prompts({
                                         type: 'confirm',
                                         name: 'choice',
-                                        message: "Do wish to proceed minting a universal access NFT to your\n" +
-                                            "account " + color.bold.magenta("".concat(CLIENT_ADDRESS)) + "?"
+                                        message: "Proceed minting a universal access NFT to your account\n" +
+                                            color.bold.magenta("".concat(CLIENT_ADDRESS)) + " ?"
                                     }, { onCancel: utils_1.onCancel })];
                                 case 1:
                                     responseChoice = _a.sent();
@@ -120,9 +120,9 @@ socket.onAny(function (message) {
                     console.log(red("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("Server is waiting on your payment.\n"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("The current price of one universal access NFT to"));
+                        color.bold("The current price of one universal access NFT"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("our restricted area is ") + red("".concat(adjustedPrice_1, " TZERO\n")));
+                        color.bold("to our restricted area is ") + red("".concat(adjustedPrice_1, " TZERO\n")));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("Do you still wish to proceed, to purchase and"));
                     console.log(yellow("UA-NFT") + color.bold("|CLIENT-APP: ") +
@@ -140,7 +140,7 @@ socket.onAny(function (message) {
                                             name: 'return',
                                             message: 'Please confirm:',
                                             choices: [
-                                                { title: "YES, transfer ".concat(adjustedPrice_1, " AZERO to mint my NFT.\n"), value: 'mint' },
+                                                { title: "YES, transfer ".concat(adjustedPrice_1, " TZERO to mint my NFT.\n"), value: 'mint' },
                                                 { title: 'NO, I do not wish to purchase an NFT for this price.\n', value: 'cancel' },
                                             ]
                                         }, { onCancel: utils_1.onCancel })];
@@ -164,8 +164,7 @@ socket.onAny(function (message) {
                                             color.bold("Transfer transaction finalized."));
                                         console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                                             color.bold("Transaction hash for record: "));
-                                        console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
-                                            color.yellow("".concat(hash, "\n")));
+                                        console.log(color.yellow("".concat(hash, "\n")));
                                         _b.label = 4;
                                     case 4: return [2 /*return*/];
                                 }
@@ -191,12 +190,12 @@ socket.onAny(function (message) {
                     nftId = args[0][0].u64;
                     // success
                     console.log(green("\n\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Universal Access NFT successfully minted!!!\n"));
+                        color.bold("Universal Access NFT successfully minted!!!"));
                     console.log(green("UA-NFT") + color.bold("|CLIENT-APP: ") +
                         color.bold("Your new Universal Access NFT is ") +
                         red("ID ".concat(nftId)) + color.bold("!\n"));
                     console.log(color.bold.magenta("\n\nUA-NFT") + color.bold("|CLIENT-APP: ") +
-                        color.bold("Check out your collection to see your NFT status.\n"));
+                        color.bold("Check out your collection to see NFT status.\n"));
                     return [4 /*yield*/, (0, utils_1.returnToMain)('return to main menu to authenticate or display NFT')];
                 case 4:
                     _a.sent();
