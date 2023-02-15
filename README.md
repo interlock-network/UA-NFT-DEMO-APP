@@ -15,7 +15,7 @@ Please see if this works and provide feedback. The target audience for this expe
 
 Open up your terminal.
 
-### (1) - Install git
+### 1 - Install git
 
 You need git first. Make sure you have it.
 
@@ -31,7 +31,7 @@ or
 sudo apt install git
 ```
 
-### (2) - Install node
+### 2 - Install node
 
 Now you need to make sure you have node.js
 
@@ -47,7 +47,7 @@ or
 sudo apt install nodejs
 ```
 
-### (3) - Clone repo
+### 3 - Clone repo
 
 Now clone this demo repo to your computer and navigate to to the `CLIdemo` directory within.
 
@@ -62,7 +62,7 @@ We need to spin up two servers and one client application.
 
 (Please verify you are in the `CLIdemo` directory.)
 
-### (1) - AUTH-SERVER
+### 1 - AUTH-SERVER
 
 Start up the NFT authentication and credential registration server. This server in practice will be controlled and administrated by the authority issuing universal access NFTs. This server never sees access credentials in cleartext form. Run:
 
@@ -70,7 +70,7 @@ Start up the NFT authentication and credential registration server. This server 
 node serverMain.js
 ```
 
-### (2) - RESTRICTED-AREA-SERVER
+### 2 - RESTRICTED-AREA-SERVER
 
 Create a new terminal instance in a new tab, making sure it is in the same directory. Start up the restricted access area server. This server is responsible for receiving access credentials over https connection and verifying that their hashes match the hashes stored on the blockchain during the NFT authentication and credential registration process. This restricted access area server serves content that only verified universal access NFT holders have access to. In practice, this server could serve the entire experience, or it may simply issue an authentication token for proffer elsewhere. Run:
 
@@ -78,7 +78,7 @@ Create a new terminal instance in a new tab, making sure it is in the same direc
 node --expose-gc restrictedArea.js
 ```
 
-### (3) - CLIENT-APP
+### 3 - CLIENT-APP
 
 Finally we can start up the client application. Create a new terminal instance in the same directory, and place it side-by-side the two server terminals if you want to soak in all the play-by-play action at once. Run:
 
