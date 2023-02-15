@@ -68,7 +68,7 @@ function setCredential(socket, message) {
                 case 1:
                     _a = _b.sent(), api = _a[0], contract = _a[1];
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "setting username and password credentials for NFT " + red("ID ".concat(message.id)));
+                        "setting credentials for NFT " + red("ID ".concat(message.id)));
                     // call setCredential tx
                     return [4 /*yield*/, (0, utils_1.contractDoer)(api, socket, contract, storageDepositLimit, refTimeLimit, proofSizeLimit, 'setCredential', 'setCredential', { u64: message.id }, '0x' + message.userhash, '0x' + message.passhash)];
                 case 2:

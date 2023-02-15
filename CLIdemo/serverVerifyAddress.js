@@ -65,16 +65,16 @@ function verifyAddress(address, socket) {
                 case 0:
                     _d.trys.push([0, 10, , 11]);
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "initiating authentication process for address " + magenta("".concat(address)));
+                        "authenticating address " + magenta("".concat(address)));
                     return [4 /*yield*/, (0, utils_1.setupSession)('verifyAddress')];
                 case 1:
                     _a = _d.sent(), api = _a[0], contract = _a[1];
                     notAuthenticated = false;
                     notAuthenticatedId = void 0;
                     console.log(yellow("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "checking if waiting for micropayment from address " + magenta("".concat(address)));
+                        magenta("".concat(address)) + " owes micropayment?");
                     console.log(yellow("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "and checking that address contains unauthenticated nfts");
+                        magenta("".concat(address)) + " has valid nft?");
                     return [4 /*yield*/, (0, utils_1.contractGetter)(api, socket, contract, 'verifyAddress', 'getCollection', address)];
                 case 2:
                     _b = _d.sent(), gasRequired = _b[0], storageDepositRequired = _b[1], RESULT_collection = _b[2], OUTPUT_collection = _b[3];
@@ -101,7 +101,7 @@ function verifyAddress(address, socket) {
                 case 6:
                     if (!(notAuthenticated == false)) return [3 /*break*/, 7];
                     console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "all nfts in address " + magenta("".concat(address)) + " already authenticated");
+                        magenta("".concat(address)) + " needs unauth nft");
                     (0, utils_1.terminateProcess)(socket, 'verifyAddress', 'all-nfts-authenticated', []);
                     return [3 /*break*/, 9];
                 case 7:

@@ -72,7 +72,7 @@ function setAuthenticated(recipient, socket) {
                 case 1:
                     _a = _b.sent(), api = _a[0], contract = _a[1];
                     console.log(green("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-                        "minting new universal access NFT for recipient " + magenta(" ".concat(recipient, "}")));
+                        "minting NFT for: " + magenta(" ".concat(recipient, "}")));
                     // call mint tx
                     return [4 /*yield*/, (0, utils_1.contractDoer)(api, socket, contract, storageDepositLimit, refTimeLimit, proofSizeLimit, 'mint', 'mint', recipient)];
                 case 2:
@@ -82,7 +82,7 @@ function setAuthenticated(recipient, socket) {
                 case 3:
                     error_1 = _b.sent();
                     console.log(red("UA-NFT") + color.bold("|AUTH-SERVER: ") + error_1);
-                    (0, utils_1.discoSocket)(socket, 'serverMint');
+                    (0, utils_1.discoSocket)(socket, 'mint');
                     process.send('program-error');
                     process.exit();
                     return [3 /*break*/, 4];
@@ -96,7 +96,7 @@ process.on('message', function (wallet) {
     var socket = (0, socket_io_client_1.io)('http://localhost:3000');
     socket.on('connect', function () {
         console.log(blue("UA-NFT") + color.bold("|AUTH-SERVER: ") +
-            "setAuthenticated socket connected, ID " + cyan("".concat(socket.id)));
+            "mint socket connected, ID " + cyan("".concat(socket.id)));
         setAuthenticated(wallet, socket)["catch"](function (error) {
             console.error(error);
             process.exit(-1);
