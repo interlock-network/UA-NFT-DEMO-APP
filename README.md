@@ -49,11 +49,11 @@ sudo apt install nodejs
 
 ### (3)
 
-Now clone this demo repo to your computer and navigate to it.
+Now clone this demo repo to your computer and navigate to to the `CLIdemo` directory within.
 
 ```
 git clone https://github.com/interlock-network/UA-NFT-DEMO-APP;
-cd UA-NFT-DEMO-APP
+cd CLIdemo/UA-NFT-DEMO-APP
 ```
 
 ## Run the demo.
@@ -65,7 +65,7 @@ We need to spin up two servers, and one client application.
 Start up the NFT authentication and credential registration server. This server in practice will be controlled and administrated by the authority issuing universal access NFTs. This server never sees access credentials in cleartext form. Run:
 
 ```
-node CLIdemo/serverMain.js
+node serverMain.js
 ```
 
 ### (2) - RESTRICTED-AREA-SERVER
@@ -73,7 +73,7 @@ node CLIdemo/serverMain.js
 Create a new terminal instance in a new tab, making sure it is in the same directory. Start up the restricted access area server. This server is responsible for receiving access credentials over https connection and verifying that their hashes match the hashes stored on the blockchain during the NFT authentication and credential registration process. This resitricted access area server serves content that only verified universal access NFT holders have access to. In practice, this server could serve the entire service, or it may simply issue an authentication token for proffer elsewhere. Run:
 
 ```
-node --expose-gc CLIdemo/restrictedArea.js
+node --expose-gc restrictedArea.js
 ```
 
 ### (3) - CLIENT-APP
@@ -81,7 +81,7 @@ node --expose-gc CLIdemo/restrictedArea.js
 Finally we can start up the client application. Create a new terminal instance in the same directory, and place it side-by-side the two server terminals if you want to soak in all the play-by-play action at once. Run:
 
 ```
-node CLIdemo/clientMain.js
+node clientMain.js
 ```
 
 Ando go from there.
